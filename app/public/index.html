@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Local room chat with private invitations and saved conversations.">
+  <title>Room Chat</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+  <main id="auth" class="auth-shell">
+    <section class="auth-intro"><span class="eyebrow">ROOM CHAT / LOCAL EDITION</span><h1>Good conversations.<br>One room at a time.</h1><p>A simple place to talk, with private rooms and a conversation history that stays.</p><div class="intro-details"><span>Private invitations</span><span>Saved messages</span><span>Runs on your computer</span></div></section>
+    <section class="auth-panel"><h2 id="auth-title">Welcome back.</h2><p id="auth-description">Sign in with your local account.</p>
+      <form id="auth-form"><label>Username<input id="username" name="username" autocomplete="username" pattern="[A-Za-z0-9_]{3,32}" minlength="3" maxlength="32" required></label>
+        <label id="name-field" hidden>Display name<input id="display-name" name="name" maxlength="40" autocomplete="nickname"></label>
+        <label>Password<input id="password" name="password" type="password" minlength="10" maxlength="128" autocomplete="current-password" required></label>
+        <small>At least 10 characters. Accounts are stored only on this computer.</small>
+        <button id="auth-submit" type="submit">Sign in →</button></form>
+      <button id="auth-toggle" class="text-button" type="button">New here? Create an account</button>
+    </section>
+  </main>
+  <main id="workspace" class="workspace" hidden>
+    <aside class="sidebar"><header><span class="eyebrow">YOUR CONVERSATIONS</span><h1>Room Chat<span class="dot"></span></h1></header>
+      <form id="profile-form" class="profile"><label>Your display name<input id="profile-name" maxlength="40" required></label><button class="secondary" type="submit">Save</button></form>
+      <div class="sidebar-actions"><button id="create-open" type="button">+ New room</button><button id="join-open" class="secondary" type="button">Join with code</button></div>
+      <div class="room-label">ROOMS <span id="room-count">0</span></div><nav id="rooms" aria-label="Chat rooms"></nav>
+      <footer><small>Local server · saved to SQLite</small><button id="logout" class="text-button" type="button">Sign out</button></footer>
+    </aside>
+    <section id="empty" class="empty"><div class="empty-mark">↗</div><span class="eyebrow">A PLACE TO START</span><h2>Your next conversation<br>starts here.</h2><p>Create a room and share its invitation code,<br>or join a room someone has invited you to.</p><button id="empty-create" type="button">Create a room →</button></section>
+    <section id="chat" class="chat" hidden><header class="chat-header"><div><span class="eyebrow">PRIVATE ROOM</span><h2 id="room-title"></h2><span id="connection" class="connection">Connecting…</span></div><div class="chat-actions"><button id="invite" class="secondary" type="button" hidden>Get invitation</button><button id="leave" class="text-button" type="button">Leave room</button></div></header>
+      <div class="presence-bar"><span class="dot"></span><span id="online">No one online yet</span></div>
+      <div id="messages" class="messages" role="log" aria-label="Conversation" aria-live="polite"><button id="older" class="secondary older" type="button" hidden>Load earlier messages</button><div id="message-list"></div></div>
+      <form id="message-form" class="composer"><label class="sr-only" for="message">Message</label><textarea id="message" placeholder="Write a message…" rows="1" maxlength="2000" required></textarea><button id="send" type="submit">Send ↑</button><small>Enter to send · Shift + Enter for a new line<span id="character-count">0 / 2000</span></small></form>
+    </section>
+  </main>
+  <dialog id="room-dialog"><form id="room-form"><span class="eyebrow">ROOM CHAT</span><h2 id="dialog-title">Create a room</h2><p id="dialog-help">Give your conversation a name.</p><label id="dialog-label">Room name</label><input id="dialog-input" aria-labelledby="dialog-label" required maxlength="65"><div class="dialog-actions"><button id="dialog-cancel" class="secondary" type="button">Cancel</button><button id="dialog-submit" type="submit">Create room</button></div></form></dialog>
+  <dialog id="invite-dialog"><span class="eyebrow">PRIVATE INVITATION</span><h2>Bring someone in.</h2><p>Share this code with another local account. Creating a new code invalidates the previous code.</p><label for="invite-code">Invitation code</label><textarea id="invite-code" rows="3" readonly></textarea><div class="dialog-actions"><button id="invite-close" class="secondary" type="button">Close</button><button id="copy-invite" type="button">Copy code</button></div></dialog>
+</body></html>

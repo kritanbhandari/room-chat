@@ -1,0 +1,16 @@
+{
+  "name": "room-chat",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Authenticated room chat with durable history and invite-based access",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node app/scripts/build.mjs",
+    "test": "node --test app/test/*.test.mjs",
+    "start": "node app/scripts/dev.mjs",
+    "test:http": "CHAT_HTTP_TESTS=1 node --test app/test/chat.test.mjs"
+  }
+}
